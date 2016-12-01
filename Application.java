@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 public class Application
 {
    
+    public static SongsDatabaseConnection SongsDatabase;
     
     public static void main(String args[]){
         JFXPanel panel = new JFXPanel();
@@ -17,7 +18,7 @@ public class Application
     {
         try
         {         
-
+            SongsDatabase = new SongsDatabaseConnection("Database.db");
 
             FXMLLoader loader = new FXMLLoader(Application.class.getResource("Scene1.fxml"));
 

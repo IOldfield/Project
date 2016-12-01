@@ -11,7 +11,7 @@ import javafx.event.EventHandler;
 import javafx.stage.WindowEvent;
 import java.util.List;
 
-public class SceneController
+public class SceneController 
 {    
 
     private static Stage stage;     
@@ -47,7 +47,7 @@ public class SceneController
 
     } 
 
-    @FXML   void initialize()           
+    public void initialize ()          
     {            
         System.out.println("Asserting controls...");
         try
@@ -56,7 +56,7 @@ public class SceneController
             assert mainPane != null : "Can't find main pane.";
             assert tablePane != null : "Can't find table pane.";
             assert name != null : "Can't find name column.";
-            assert centralDB!= null : "Can't find CentralDB.";
+            assert centralDB != null : "Can't find CentralDB.";
             assert length != null : "Can't find length column.";
             assert artist!= null : "Can't find artist column.";
             assert album!= null : "Can't find album column.";
@@ -75,7 +75,12 @@ public class SceneController
         {
             System.out.println("FXML assertion failure: " + ae.getMessage());
             Application.terminate();
-            }
+        }
+		
+		System.out.println("Populating scene with items from the database...");        
+        @SuppressWarnings("unchecked")
+        <Song> targetList = centralDB.getItems();  
+        Song.readAll(targetList);
         }
 
 
@@ -125,3 +130,5 @@ public class SceneController
         System.out.println("Search was clicked!");        
     }
 }
+
+
