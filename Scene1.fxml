@@ -1,60 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane id="mainPane" fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #1c1c1c;" xmlns="http://javafx.com/javafx/8.0.92" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SceneController">
-   <children>
-      <Button id="buttonAdd" fx:id="addButton" layoutX="872.0" layoutY="179.0" mnemonicParsing="false" onMouseClicked="#addClicked" style="-fx-background-color: #1c1c1c;" text="Add" textFill="WHITE">
-         <font>
-            <Font name="Impact" size="12.0" />
-         </font></Button>
-      <Button id="buttonEdit" fx:id="editButton" layoutX="874.0" layoutY="287.0" mnemonicParsing="false" onMouseClicked="#editClicked" style="-fx-background-color: #1c1c1c;" text="Edit" textFill="WHITE">
-         <font>
-            <Font name="Impact" size="12.0" />
-         </font></Button>
-      <Button id="buttonDelete" fx:id="deleteButton" layoutX="865.0" layoutY="395.0" mnemonicParsing="false" onMouseClicked="#deleteClicked" style="-fx-background-color: #1c1c1c;" text="Delete" textFill="WHITE">
-         <font>
-            <Font name="Impact" size="12.0" />
-         </font></Button>
-      <Button id="buttonRefine" fx:id="refineButton" layoutX="39.0" layoutY="287.0" mnemonicParsing="false" onMouseClicked="#refineClicked" style="-fx-background-color: #1c1c1c;" text="Refine" textFill="WHITE">
-         <font>
-            <Font name="Impact" size="12.0" />
-         </font></Button>
-      <Pane id="tablePane" fx:id="tablePane" layoutX="134.0" layoutY="64.0" prefHeight="476.0" prefWidth="693.0" style="-fx-background-color: #2d2d2d;">
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SceneController">
+   <left>
+      <VBox alignment="CENTER" style="-fx-background-color: #1c1c1c;" BorderPane.alignment="CENTER">
          <children>
-            <TableView id="centralDB" fx:id="centralDB" prefHeight="476.0" prefWidth="693.0" style="-fx-background-color: #2b2b2b;">
-              <columns>
-                <TableColumn id="columnName" fx:id="name" prefWidth="96.0" text="Song name" />
-                <TableColumn id="columnLength" fx:id="length" prefWidth="100.0" text="Song length" />
-                  <TableColumn id="columnArtist" fx:id="artist" prefWidth="75.0" text="Artist" />
-                  <TableColumn id="columnAlbum" fx:id="album" prefWidth="77.0" text="Album" />
-                  <TableColumn id="columnPeople" fx:id="people" minWidth="0.0" prefWidth="277.0" text="Number of people needed to play" />
-                  <TableColumn id="columnRating" fx:id="rating" prefWidth="67.0" text="Rating" />
-              </columns>
-            </TableView>
+            <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+               <children>
+                  <Button fx:id="addButton" mnemonicParsing="false" onMouseClicked="#addClicked" style="-fx-background-color: #1c1c1c;" text="Add" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+               <children>
+                  <Button fx:id="refineButton" mnemonicParsing="false" onMouseClicked="#refineClicked" style="-fx-background-color: #1c1c1c;" text="Refine" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+               <children>
+                  <Button fx:id="sortButton" mnemonicParsing="false" onMouseClicked="#sortClicked" style="-fx-background-color: #1c1c1c;" text="Sort" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
          </children>
-      </Pane>
-      <Button id="buttonSort" fx:id="sortButton" layoutX="44.0" layoutY="395.0" mnemonicParsing="false" onMouseClicked="#sortClicked" style="-fx-background-color: #1c1c1c;" text="Sort" textFill="WHITE">
-         <font>
-            <Font name="Impact" size="12.0" />
-         </font>
-      </Button>
-      <Label fx:id="title" layoutX="415.0" layoutY="14.0" text="Music Database" textFill="WHITE">
-         <font>
-            <Font name="Impact" size="20.0" />
-         </font>
-      </Label>
-      <Button fx:id="searchButton" layoutX="14.0" layoutY="179.0" mnemonicParsing="false" onMouseClicked="#searchClicked" style="-fx-background-color: #1c1c1c;" text="Search" textFill="WHITE">
-         <font>
-            <Font name="Impact" size="12.0" />
-         </font>
-      </Button>
-      <TextField fx:id="textField" layoutX="60.0" layoutY="179.0" prefHeight="25.0" prefWidth="67.0" promptText="..." />
-   </children>
-</Pane>
+      </VBox>
+   </left>
+   <top>
+      <HBox alignment="TOP_RIGHT" style="-fx-background-color: #1c1c1c;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="title" alignment="CENTER" text="MUSIC DATABSE" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <Button fx:id="searchButton" mnemonicParsing="false" onMouseClicked="#searchClicked" style="-fx-background-color: #1c1c1c;" text="Search" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+            <TextField fx:id="textField" prefHeight="31.0" prefWidth="103.0" promptText="...">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </TextField>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <ListView fx:id="centralDB" prefHeight="458.0" prefWidth="803.0" style="-fx-background-color: #2c2c2c;" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </ListView>
+   </center>
+</BorderPane>

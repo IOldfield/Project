@@ -23,11 +23,12 @@ public class Song
     {
         return SongName;
     }
+    
     public static void readAll(List<Song> list)
     {
         list.clear();       
         
-        PreparedStatement statement = Application.SongsDatabase.newStatement("SELECT SongId, SongName, ReleaseID FROM  ORDER BY id"); 
+        PreparedStatement statement = Application.SongsDatabase.newStatement("SELECT SongId, SongName, ReleaseID FROM Songs ORDER BY SongId"); 
         
         if (statement != null)     
         {
