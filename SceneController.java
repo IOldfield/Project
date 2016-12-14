@@ -7,6 +7,8 @@ import javafx.scene.control.ListView;
 import javafx.event.EventHandler;
 import javafx.stage.WindowEvent;
 import java.util.List;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.*;
 
 public class SceneController 
 {    
@@ -14,7 +16,7 @@ public class SceneController
     private static Stage stage;     
 
     @FXML   private Label title;
-    @FXML   private ListView<Song> centralDB;
+    @FXML   private ListView centralDB;
     @FXML   private Button searchButton;
     @FXML   private TextField textField;
     @FXML   private Button addButton;
@@ -93,5 +95,33 @@ public class SceneController
     {
         System.out.println("Search was clicked!");        
     }
+    
+    @FXML   void listViewClicked()
+    {
+        Song selectedItem = (Song) centralDB.getSelectionModel().getSelectedItem();
+        
+        if (selectedItem == null)
+        {
+            System.out.println("Nothing selected");
+        }
+        else
+        {
+            System.out.println(selectedItem +"(ID: " + selectedItem.getSongID() + ") is selected.");
+            
+            try
+            {
+                FXMLLoader loader = new FXMLLoader(Application.class.getResource("Scene2.fxml"));
+                
+                Stage stage = new Stage();
+                stage.setTitle(selectedItem.getSongName());
+                stage.setScene(new Scene(loader.load()));
+                stage.show();
+            }
+            catch(Exception E)
+            {
+                System.out.println(E.getMessage());
+            }
+    }
+}
 }
 

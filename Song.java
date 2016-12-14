@@ -109,7 +109,7 @@ public class Song
 
                 statement = Application.SongsDatabase.newStatement("SELECT SongID FROM Songs ORDER BY SongID DESC");             
 
-                if (statement != null)	
+                if (statement != null)  
                 {
                     ResultSet results = Application.SongsDatabase.runQuery(statement);
                     if (results != null)
@@ -143,5 +143,13 @@ public class Song
         }
 
     }
-
+    
+    public String getSongName(){
+        return this.SongName;
+    }
+    
+    public int getSongID(){
+        return this.SongID;
+    }
 }
+
