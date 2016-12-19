@@ -14,6 +14,9 @@ public class SceneController2
 {    
 
     private static Stage stage;     
+    
+    @FXML   private Button deleteButton;
+    @FXML   private ListView list;
 
     public SceneController2()         
     {
@@ -32,7 +35,9 @@ public class SceneController2
         System.out.println("Asserting controls...");
         try
         {
-
+            assert list != null : "Can't find list";
+            assert deleteButton != null : "Can't find delete button";
+            
         }
         catch (AssertionError ae)
         {
@@ -40,7 +45,11 @@ public class SceneController2
             Application.terminate();
         }   
 
-        
+        System.out.println("Populating scene with items from the database...");     
+
+        @SuppressWarnings("unchecked")
+        List<Song> targetList = list.getItems();  
+        Song.readAll(targetList);
     }
 
     public void prepareStageEvents(Stage stage)
@@ -49,12 +58,45 @@ public class SceneController2
 
         this.stage = stage;
 
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() 
+            {
                 public void handle(WindowEvent we) {
                     System.out.println("Exit button was clicked!");
                     Application.terminate();
                 }
             });
-    }     
-}
+    }    
     
+    @FXML   void deleteClicked()
+    {
+        System.out.println("Delete was clicked");
+    }
+    
+    @FXML   void listViewClicked()
+    {
+        Song selectedItem = (Song) list.getSelectionModel().getSelectedItem();
+        
+        if (selectedItem == null)
+        {
+            System.out.println("Nothing selected");
+        }
+        else
+        {
+            System.out.println(selectedItem +"(ID: " + selectedItem.getSongID() + ") is selected.");
+            
+            try
+            {
+                FXMLLoader loader = new FXMLLoader(Application.class.getResource("Scene3.fxml"));
+                
+                Stage stage = new Stage();
+                stage.setTitle(selectedItem.getSongName());
+                stage.setScene(new Scene(loader.load()));
+                stage.show();
+            }
+            catch(Exception E)
+            {
+                System.out.println(E.getMessage());
+            }
+        }
+    }
+}

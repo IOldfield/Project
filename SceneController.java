@@ -3,12 +3,17 @@ import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn;
 import javafx.event.EventHandler;
 import javafx.stage.WindowEvent;
 import java.util.List;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
+import javafx.scene.control.cell.PropertyValueFactory;
+
 
 public class SceneController 
 {    
@@ -16,12 +21,14 @@ public class SceneController
     private static Stage stage;     
 
     @FXML   private Label title;
-    @FXML   private ListView centralDB;
+    @FXML   private TableView<Song> centralDB;
     @FXML   private Button searchButton;
     @FXML   private TextField textField;
     @FXML   private Button addButton;
     @FXML   private Button refineButton;
     @FXML   private Button sortButton;
+    
+    
 
     public SceneController()         
     {
@@ -47,19 +54,51 @@ public class SceneController
             assert sortButton != null : "Can't find sort button.";
             assert searchButton != null : "Can't find search button.";
             assert textField != null : "Can't find text field.";
-
+            
         }
         catch (AssertionError ae)
         {
             System.out.println("FXML assertion failure: " + ae.getMessage());
             Application.terminate();
         }
-
-        System.out.println("Populating scene with items from the database...");     
-
+    
+        System.out.println("Populating scene with items from the database..."); 
         @SuppressWarnings("unchecked")
-        List<Song> targetList = centralDB.getItems();  
-        Song.readAll(targetList);
+
+        ObservableList<Song> songList = FXCollections.observableArrayList();  // Tables require a special type of list.
+        Song.readAll(songList);             // Hand over control to the fruit model to populate this list.
+
+        /* The first column is for the Fruit 'type' values */
+        TableColumn<Song, String> SongIDColumn = new TableColumn<>("Song ID");
+        SongIDColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("SongID"));
+        SongIDColumn.setMinWidth(150);
+        centralDB.getColumns().add(SongIDColumn);
+        
+        TableColumn<Song, String> SongNameColumn = new TableColumn<>("Song Name");
+        SongNameColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("SongName"));
+        SongNameColumn.setMinWidth(150);
+        centralDB.getColumns().add(SongNameColumn);
+        
+        TableColumn<Song, String> SongLengthColumn = new TableColumn<>("Song Length");
+        SongLengthColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("SongLength"));
+        SongLengthColumn.setMinWidth(150);
+        centralDB.getColumns().add(SongLengthColumn); 
+        
+        TableColumn<Song, String> ArtistIDColumn = new TableColumn<>("Artist ID");
+        ArtistIDColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("ArtistID"));
+        ArtistIDColumn.setMinWidth(150);
+        centralDB.getColumns().add(ArtistIDColumn);
+        
+        TableColumn<Song, String> ReleaseIDColumn = new TableColumn<>("Release ID");
+        ReleaseIDColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("ReleaseID"));
+        ReleaseIDColumn.setMinWidth(150);
+        centralDB.getColumns().add(ReleaseIDColumn);
+        
+        
+
+        /* Finally, set the list to be displayed in the table. The columns are matched up automatically by JavaFX */
+        centralDB.setItems(songList);
+    
     }
 
     public void prepareStageEvents(Stage stage)
@@ -96,7 +135,7 @@ public class SceneController
         System.out.println("Search was clicked!");        
     }
     
-    @FXML   void listViewClicked()
+    @FXML   void tableViewClicked()
     {
         Song selectedItem = (Song) centralDB.getSelectionModel().getSelectedItem();
         
@@ -121,7 +160,7 @@ public class SceneController
             {
                 System.out.println(E.getMessage());
             }
+        }
     }
-}
 }
 

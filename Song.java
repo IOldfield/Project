@@ -2,46 +2,69 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.util.List;
+import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
+import javafx.beans.property.SimpleStringProperty;
 
 public class Song
 {
+    public IntegerProperty SongID;
+    private IntegerProperty ArtistID;
+    private IntegerProperty ReleaseID;
+    private StringProperty SongName;        
+    private StringProperty SongLength;
    
-    public int SongID;
-    public String SongName;
-    public int ReleaseID;
+    public String getSongName() { return SongName.get(); }
+    public void setSongName(String SongName) { this.SongName = new SimpleStringProperty(SongName); }    
+    
+    public String getSongLength() { return SongLength.get(); }
+    public void setSongLength(String SongLength) { this.SongLength = new SimpleStringProperty(SongLength); }
 
-   
-    public Song(int id, String SongName, int ReleaseID)
+    public int getSongID() { return SongID.get(); }
+    public void setSongID(int SongID) { this.SongID = new SimpleIntegerProperty(SongID); }
+ 
+    public int getArtistID() { return ArtistID.get(); }
+    public void setArtistID(int ArtistID) { this.ArtistID = new SimpleIntegerProperty(ArtistID); }
+    
+    public int getReleaseID() { return ReleaseID.get(); }
+    public void setReleaseID(int ReleaseID) { this.ReleaseID = new SimpleIntegerProperty(ReleaseID); }
+    
+    public Song(int SongID, int ArtistID, int ReleaseID, String SongName, String SongLength)
     {
-        this.SongID = SongID;        
-        this.SongName = SongName;
-        this.ReleaseID = ReleaseID;
-    }
-
-   
-    @Override public String toString()
-    {
-        return SongName;
+        setSongID(SongID);  
+        setArtistID(ArtistID);
+        setReleaseID(ReleaseID);
+        setSongName(SongName);
+        setSongLength(SongLength);
     }
     
+    @Override public String toString()
+    {
+        return (SongName + " " + SongLength + " "  +SongID + " "  + ArtistID + " "  + ReleaseID );
+    }
+
     public static void readAll(List<Song> list)
     {
-        list.clear();       
+        list.clear();      
         
-        PreparedStatement statement = Application.SongsDatabase.newStatement("SELECT SongId, SongName, ReleaseID FROM Songs ORDER BY SongId"); 
-        
-        if (statement != null)     
+        PreparedStatement statement = Application.SongsDatabase.newStatement("SELECT SongID, ArtistID, ReleaseID, SongName, SongLength FROM Songs"); 
+
+        if (statement != null)      
         {
             ResultSet results = Application.SongsDatabase.runQuery(statement);       
 
-            if (results != null)        
+            if (results != null)      
             {
                 try {                              
                     while (results.next()) {                                               
-                        list.add( new Song(results.getInt("SongID"), results.getString("SongName"), results.getInt("ReleaseID")));
+                        list.add( new Song(results.getInt("SongID"), 
+                                results.getInt("ArtistID"), 
+                                results.getInt("ReleaseID"),
+                                results.getString("SongName"),
+                                results.getString("SongLength")) );
                     }
                 }
-                catch (SQLException resultsexception)       
+                catch (SQLException resultsexception)      
                 {
                     System.out.println("Database result processing error: " + resultsexception.getMessage());
                 }
@@ -50,106 +73,4 @@ public class Song
 
     }
 
-    public static Song getById(int SongID)
-    {
-        Song Song = null;
-
-        PreparedStatement statement = Application.SongsDatabase.newStatement("SELECT SongID, SongName, ReleaseID FROM Songs WHERE id = ?"); 
-
-        try 
-        {
-            if (statement != null)
-            {
-                statement.setInt(1, SongID);
-                ResultSet results = Application.SongsDatabase.runQuery(statement);
-
-                if (results != null)
-                {
-                    Song = new Song(results.getInt("SongID"), results.getString("SongName"), results.getInt("ReleaseID"));
-                }
-            }
-        }
-        catch (SQLException resultsexception)
-        {
-            System.out.println("Database result processing error: " + resultsexception.getMessage());
-        }
-
-        return Song;
-    }
-
-    public static void deleteById(int SongID)
-    {
-        try 
-        {
-
-            PreparedStatement statement = Application.SongsDatabase.newStatement("DELETE FROM Songs WHERE SongID = ?");             
-            statement.setInt(1, SongID);
-
-            if (statement != null)
-            {
-                Application.SongsDatabase.executeUpdate(statement);
-            }
-        }
-        catch (SQLException resultsexception)
-        {
-            System.out.println("Database result processing error: " + resultsexception.getMessage());
-        }
-
-    }
-    
-    public void save()    
-    {
-        PreparedStatement statement;
-
-        try 
-        {
-
-            if (SongID == 0)
-            {
-
-                statement = Application.SongsDatabase.newStatement("SELECT SongID FROM Songs ORDER BY SongID DESC");             
-
-                if (statement != null)  
-                {
-                    ResultSet results = Application.SongsDatabase.runQuery(statement);
-                    if (results != null)
-                    {
-                        SongID = results.getInt("SongID") + 1;
-                    }
-                }
-
-                statement = Application.SongsDatabase.newStatement("INSERT INTO Songs (SongID, SongName, ReleaseID) VALUES (?, ?, ?)");             
-                statement.setInt(1, SongID);
-                statement.setString(2, SongName);
-                statement.setInt(3, ReleaseID);         
-
-            }
-            else
-            {
-                statement = Application.SongsDatabase.newStatement("UPDATE Songs SET SongName = ?, ReleaseID = ? WHERE SongID = ?");             
-                statement.setString(1, SongName);
-                statement.setInt(2, ReleaseID);   
-                statement.setInt(3, SongID);
-            }
-
-            if (statement != null)
-            {
-                Application.SongsDatabase.executeUpdate(statement);
-            }
-        }
-        catch (SQLException resultsexception)
-        {
-            System.out.println("Database result processing error: " + resultsexception.getMessage());
-        }
-
-    }
-    
-    public String getSongName(){
-        return this.SongName;
-    }
-    
-    public int getSongID(){
-        return this.SongID;
-    }
 }
-
