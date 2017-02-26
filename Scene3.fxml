@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="880.0" prefWidth="600.0" style="-fx-background-color: #1c1c1c;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <VBox BorderPane.alignment="BOTTOM_LEFT">
+         <children>
+            <HBox minHeight="67.0" translateY="8.0" VBox.vgrow="NEVER">
+               <children>
+                  <Label minHeight="67.0" text="Song Name" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets left="5.0" />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets left="5.0" />
+               </opaqueInsets>
+            </HBox>
+            <HBox translateY="8.0" VBox.vgrow="NEVER">
+               <children>
+                  <Label minHeight="67.0" text="Song Length" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets left="5.0" />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets left="5.0" />
+               </opaqueInsets>
+            </HBox>
+            <HBox translateY="8.0" VBox.vgrow="NEVER">
+               <children>
+                  <Label minHeight="67.0" text="Artist Name" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets left="5.0" />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets left="5.0" />
+               </opaqueInsets>
+            </HBox>
+            <HBox translateY="8.0" VBox.vgrow="NEVER">
+               <children>
+                  <Label minHeight="67.0" text="Number Of Members" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets left="5.0" />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets left="5.0" />
+               </opaqueInsets>
+            </HBox>
+            <HBox translateY="8.0" VBox.vgrow="NEVER">
+               <children>
+                  <Label minHeight="67.0" text="Artist Start Year" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets left="5.0" />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets left="5.0" />
+               </opaqueInsets>
+            </HBox>
+            <HBox translateY="8.0" VBox.vgrow="NEVER">
+               <children>
+                  <Label minHeight="67.0" text="Release Format" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets left="5.0" />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets left="5.0" />
+               </opaqueInsets>
+            </HBox>
+            <HBox translateY="8.0" VBox.vgrow="NEVER">
+               <children>
+                  <Label minHeight="67.0" text="Release Name" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets left="5.0" />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets left="5.0" />
+               </opaqueInsets>
+            </HBox>
+            <HBox translateY="8.0" VBox.vgrow="NEVER">
+               <children>
+                  <Label minHeight="67.0" text="Release Length" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets left="5.0" />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets left="5.0" />
+               </opaqueInsets>
+            </HBox>
+            <HBox translateY="8.0" VBox.vgrow="NEVER">
+               <children>
+                  <Label minHeight="67.0" text="Number Of Songs On Release" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets left="5.0" />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets left="5.0" />
+               </opaqueInsets>
+            </HBox>
+            <HBox translateY="8.0" VBox.vgrow="NEVER">
+               <children>
+                  <Label minHeight="67.0" text="Release Date" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets left="5.0" />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets left="5.0" />
+               </opaqueInsets>
+            </HBox>
+            <HBox translateY="8.0" VBox.vgrow="NEVER">
+               <children>
+                  <Label minHeight="67.0" text="Release Genre" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets left="5.0" />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets left="5.0" />
+               </opaqueInsets>
+            </HBox>
+            <HBox translateY="8.0" VBox.vgrow="NEVER">
+               <children>
+                  <Label minHeight="67.0" text="Record Label" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets left="5.0" />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets left="5.0" />
+               </opaqueInsets>
+            </HBox>
+            <HBox translateY="8.0" VBox.vgrow="NEVER">
+               <children>
+                  <Label minHeight="67.0" text="Record Label Start Year" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets left="5.0" />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets left="5.0" />
+               </opaqueInsets>
+            </HBox>
+         </children>
+         <padding>
+            <Insets right="5.0" />
+         </padding>
+      </VBox>
+   </left>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox translateY="144.0" VBox.vgrow="NEVER">
+               <children>
+                  <ChoiceBox prefWidth="150.0" />
+               </children>
+            </HBox>
+            <HBox translateY="180.0" VBox.vgrow="NEVER">
+               <children>
+                  <ChoiceBox prefWidth="150.0" />
+               </children>
+            </HBox>
+            <HBox translateY="216.0" VBox.vgrow="NEVER">
+               <children>
+                  <ChoiceBox prefWidth="150.0" />
+               </children>
+            </HBox>
+            <HBox translateY="252.0" VBox.vgrow="NEVER">
+               <children>
+                  <ChoiceBox prefWidth="150.0" />
+               </children>
+            </HBox>
+            <HBox translateY="288.0" VBox.vgrow="NEVER">
+               <children>
+                  <ChoiceBox prefWidth="150.0" />
+               </children>
+            </HBox>
+            <HBox translateY="391.0">
+               <children>
+                  <ChoiceBox prefWidth="150.0" />
+               </children>
+            </HBox>
+            <HBox translateY="427.0">
+               <children>
+                  <DatePicker />
+               </children>
+            </HBox>
+            <HBox translateY="463.0" VBox.vgrow="NEVER">
+               <children>
+                  <ChoiceBox prefWidth="150.0" />
+               </children>
+            </HBox>
+            <HBox translateY="499.0" VBox.vgrow="NEVER">
+               <children>
+                  <ChoiceBox prefWidth="150.0" />
+               </children>
+            </HBox>
+            <HBox translateY="535.0" VBox.vgrow="NEVER">
+               <children>
+                  <ChoiceBox prefWidth="150.0" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </VBox>
+   </center>
+   <right>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" minHeight="67.0">
+               <children>
+                  <TextField />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" minHeight="67.0">
+               <children>
+                  <TextField />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" minHeight="67.0">
+               <children>
+                  <TextField />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" minHeight="67.0">
+               <children>
+                  <TextField />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" minHeight="67.0">
+               <children>
+                  <TextField />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" minHeight="67.0">
+               <children>
+                  <TextField />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" minHeight="67.0">
+               <children>
+                  <TextField />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" minHeight="67.0">
+               <children>
+                  <TextField />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" minHeight="67.0">
+               <children>
+                  <TextField />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" minHeight="67.0">
+               <children>
+                  <TextField />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" minHeight="67.0">
+               <children>
+                  <TextField />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" minHeight="67.0">
+               <children>
+                  <TextField />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" minHeight="67.0" prefHeight="0.0">
+               <children>
+                  <TextField />
+               </children>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets right="10.0" />
+         </BorderPane.margin>
+      </VBox>
+   </right>
+   <top>
+      <HBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Add Menu" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </top>
+</BorderPane>

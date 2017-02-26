@@ -13,11 +13,11 @@ import javafx.scene.*;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import javafx.scene.control.cell.PropertyValueFactory;
-
+import java.sql.SQLException;
 
 public class SceneController 
 {    
-
+    //The variable names used in scenebuilder
     private static Stage stage;     
 
     @FXML   private Label title;
@@ -27,8 +27,6 @@ public class SceneController
     @FXML   private Button addButton;
     @FXML   private Button refineButton;
     @FXML   private Button sortButton;
-    
-    
 
     public SceneController()         
     {
@@ -41,73 +39,71 @@ public class SceneController
         }        
 
     } 
-
-    public void initialize ()          
+    
+    public void initialize () throws SQLException        
     {            
         System.out.println("Asserting controls...");
         try
         {
-            assert title != null : "Can't find title";
+            assert title != null : "Can't find title";      //Checks if the assests exist
             assert centralDB != null : "Can't find CentralDB.";
             assert addButton != null : "Can't find add button.";
             assert refineButton != null : "Can't find refine button.";
             assert sortButton != null : "Can't find sort button.";
             assert searchButton != null : "Can't find search button.";
             assert textField != null : "Can't find text field.";
-            
+
         }
         catch (AssertionError ae)
         {
-            System.out.println("FXML assertion failure: " + ae.getMessage());
+            System.out.println("FXML assertion failure: " + ae.getMessage()); //If they dont exist the program terminates
             Application.terminate();
         }
-    
+        //Fills table view with songs from "Song" class
         System.out.println("Populating scene with items from the database..."); 
         @SuppressWarnings("unchecked")
 
-        ObservableList<Song> songList = FXCollections.observableArrayList();  // Tables require a special type of list.
+        ObservableList<Song> songList = FXCollections.observableArrayList();  
         Song.readAll(songList);             // Hand over control to the fruit model to populate this list.
 
-        /* The first column is for the Fruit 'type' values */
-        TableColumn<Song, String> SongIDColumn = new TableColumn<>("Song ID");
-        SongIDColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("SongID"));
-        SongIDColumn.setMinWidth(150);
-        centralDB.getColumns().add(SongIDColumn);
         
         TableColumn<Song, String> SongNameColumn = new TableColumn<>("Song Name");
         SongNameColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("SongName"));
-        SongNameColumn.setMinWidth(150);
+        SongNameColumn.setMinWidth(600);
         centralDB.getColumns().add(SongNameColumn);
-        
+
+        TableColumn<Song, String> GenreColumn = new TableColumn<>("Genre");
+        GenreColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("Genre"));
+        GenreColumn.setMinWidth(150);
+        centralDB.getColumns().add(GenreColumn);
+
+        TableColumn<Song, String> ArtistNameColumn = new TableColumn<>("Artist Name");
+        ArtistNameColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("ArtistName"));
+        ArtistNameColumn.setMinWidth(200);
+        centralDB.getColumns().add(ArtistNameColumn);
+
+        TableColumn<Song, String> ReleaseNameColumn = new TableColumn<>("Release Name");
+        ReleaseNameColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("ReleaseName"));
+        ReleaseNameColumn.setMinWidth(400);
+        centralDB.getColumns().add(ReleaseNameColumn);
+
         TableColumn<Song, String> SongLengthColumn = new TableColumn<>("Song Length");
         SongLengthColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("SongLength"));
         SongLengthColumn.setMinWidth(150);
         centralDB.getColumns().add(SongLengthColumn); 
-        
-        TableColumn<Song, String> ArtistIDColumn = new TableColumn<>("Artist ID");
-        ArtistIDColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("ArtistID"));
-        ArtistIDColumn.setMinWidth(150);
-        centralDB.getColumns().add(ArtistIDColumn);
-        
-        TableColumn<Song, String> ReleaseIDColumn = new TableColumn<>("Release ID");
-        ReleaseIDColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("ReleaseID"));
-        ReleaseIDColumn.setMinWidth(150);
-        centralDB.getColumns().add(ReleaseIDColumn);
-        
-        
 
-        /* Finally, set the list to be displayed in the table. The columns are matched up automatically by JavaFX */
         centralDB.setItems(songList);
-    
+        
     }
-
+   
     public void prepareStageEvents(Stage stage)
     {
-        System.out.println("Preparing stage events...");
+        System.out.println("Preparing stage events..."); //Launches Scene 
 
         this.stage = stage;
 
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>()
+            {
                 public void handle(WindowEvent we) {
                     System.out.println("Exit button was clicked!");
                     Application.terminate();
@@ -115,6 +111,10 @@ public class SceneController
             });
     }       
 
+    @FXML   void refresh() throws SQLException{
+        initialize();
+    }
+    
     @FXML   void addClicked()
     {
         System.out.println("Add was clicked!");        
@@ -132,33 +132,39 @@ public class SceneController
 
     @FXML   void searchClicked()
     {
-        System.out.println("Search was clicked!");        
+        System.out.println("Search was clicked!"); 
     }
-    
+
     @FXML   void tableViewClicked()
     {
-        Song selectedItem = (Song) centralDB.getSelectionModel().getSelectedItem();
-        
+        Song selectedItem = (Song) centralDB.getSelectionModel().getSelectedItem();  //Gets the name of the song clicked
+
         if (selectedItem == null)
         {
             System.out.println("Nothing selected");
         }
         else
         {
-            System.out.println(selectedItem +"(ID: " + selectedItem.getSongID() + ") is selected.");
-            
+            System.out.println(selectedItem +"(ID: " + selectedItem.getSongName() + ") is selected.");  //Prints what was clicked in the console  
+
             try
             {
-                FXMLLoader loader = new FXMLLoader(Application.class.getResource("Scene2.fxml"));
-                
+                FXMLLoader loader = new FXMLLoader(Application.class.getResource("Scene2.fxml"));  //Launches the second scene
+
                 Stage stage = new Stage();
                 stage.setTitle(selectedItem.getSongName());
                 stage.setScene(new Scene(loader.load()));
                 stage.show();
+                
+                SceneController2 controller2 = loader.getController();
+                controller2.prepareStageEvents(stage, this, selectedItem.getSongName());
+                
+                controller2.setTempName(selectedItem.getSongName());
+
             }
             catch(Exception E)
             {
-                System.out.println(E.getMessage());
+                System.out.println(E.getMessage());    //Throws errors if any
             }
         }
     }
